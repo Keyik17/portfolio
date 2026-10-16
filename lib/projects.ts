@@ -170,6 +170,37 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "roundtrip",
+    title: "Roundtrip",
+    summary: "A landing page for a service that turns a coffee shop's guest Wi-Fi into a list of regulars.",
+    tags: ["landing page", "web design", "front-end"],
+    cover: w("roundtrip", "cover"),
+    live: { href: "https://roundtrip-landing.pages.dev/", label: "roundtrip-landing.pages.dev" },
+    meta: [
+      { label: "Type", value: "Concept" },
+      { label: "Role", value: "Design, front-end" },
+      { label: "Stack", value: "HTML, CSS, JavaScript, Vite" },
+      { label: "Repo", value: "coffeeshopidea", href: "https://github.com/Keyik17/coffeeshopidea" },
+    ],
+    body: [
+      "Roundtrip is an idea for neighborhood cafés: guests sign in to the Wi-Fi with a phone number, and the shop can send a few well-timed offers a month to bring them back.",
+      "I designed and coded the landing page with a warm, editorial feel: big type over real café photos, a short four-step explanation, example shops, a sample dashboard, simple pricing and a FAQ.",
+    ],
+    media: [
+      { kind: "page", src: w("roundtrip", "landing-full"), alt: "Roundtrip landing page", caption: "Landing page, scroll inside the frame" },
+      {
+        kind: "phones",
+        caption: "Mobile",
+        items: [
+          { src: w("roundtrip", "m1"), alt: "Mobile hero" },
+          { src: w("roundtrip", "m2"), alt: "What it does" },
+          { src: w("roundtrip", "m3"), alt: "The problem" },
+          { src: w("roundtrip", "m4"), alt: "How it works" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "petal-glow",
     live: { href: "https://petal-glow-concept.pages.dev/", label: "petal-glow-concept.pages.dev" },
     title: "Petal & Glow",
