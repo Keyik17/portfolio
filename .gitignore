@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.raw
+.raw2
+instrumentation-client.ts
+.playwright-mcp
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
