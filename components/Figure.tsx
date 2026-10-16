@@ -1,17 +1,20 @@
 import { platformSpec, type Media } from "@/lib/projects";
 
+// Big exports are 2x; a half-size copy sits next to each one for regular screens.
+const hd = (src: string) => ({ src, srcSet: `${src.replace(/\.webp$/, "-1x.webp")} 1440w, ${src} 2880w` });
+
 export function Figure({ m }: { m: Media }) {
   return (
     <figure>
       {m.kind === "image" && (
         <div className="frame">
-          <img src={m.src} alt={m.alt} loading="lazy" />
+          <img {...hd(m.src)} sizes="(max-width: 900px) 100vw, 1240px" alt={m.alt} loading="lazy" decoding="async" />
         </div>
       )}
       {m.kind === "page" && (
         <div className="frame page-frame">
           <div className="page-scroll" tabIndex={0} aria-label={`${m.alt} (scrollable)`}>
-            <img src={m.src} alt={m.alt} loading="lazy" />
+            <img {...hd(m.src)} sizes="(max-width: 900px) 100vw, 1240px" alt={m.alt} loading="lazy" decoding="async" />
           </div>
         </div>
       )}
