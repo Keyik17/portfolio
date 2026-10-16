@@ -256,6 +256,9 @@ export const projects: Project[] = [
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
 
+// Old addresses that still work and point to the new ones.
+export const movedProjects: Record<string, string> = { moku: "mobile-mechanics" };
+
 export const platformSpec = {
   stats: [
     { value: "70+", label: "block variations" },

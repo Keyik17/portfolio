@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Figure } from "@/components/Figure";
-import { getProject, projects } from "@/lib/projects";
+import { getProject, movedProjects, projects } from "@/lib/projects";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return [...projects.map((p) => p.slug), ...Object.keys(movedProjects)].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Work({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  if (movedProjects[slug]) redirect(`/work/${movedProjects[slug]}/`);
   const p = getProject(slug);
   if (!p) notFound();
 
