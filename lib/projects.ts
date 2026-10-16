@@ -184,7 +184,7 @@ export const projects: Project[] = [
     ],
     body: [
       "Roundtrip is an idea for neighborhood cafés: guests sign in to the Wi-Fi with a phone number, and the shop can send a few well-timed offers a month to bring them back.",
-      "I designed and coded the landing page with a warm, editorial feel: big type over real café photos, a short four-step explanation, example shops, a sample dashboard, simple pricing and a FAQ.",
+      "I designed and coded the landing page with a warm, editorial feel: big type over real café photos, a short four-step explanation, example shops, an animated sample dashboard, simple pricing and a FAQ.",
     ],
     media: [
       { kind: "page", src: w("roundtrip", "landing-full"), alt: "Roundtrip landing page", caption: "Landing page, scroll inside the frame" },
@@ -194,8 +194,8 @@ export const projects: Project[] = [
         items: [
           { src: w("roundtrip", "m1"), alt: "Mobile hero" },
           { src: w("roundtrip", "m2"), alt: "What it does" },
-          { src: w("roundtrip", "m3"), alt: "The problem" },
-          { src: w("roundtrip", "m4"), alt: "How it works" },
+          { src: w("roundtrip", "m3"), alt: "Fill your slow days" },
+          { src: w("roundtrip", "m4"), alt: "Live dashboard" },
         ],
       },
     ],
