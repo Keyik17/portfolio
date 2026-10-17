@@ -27,6 +27,11 @@ export function Figure({ m }: { m: Media }) {
           </div>
         </div>
       )}
+      {m.kind === "embed" && (
+        <div className="frame embed-frame">
+          <iframe src={m.src} title={m.title} loading="lazy" style={{ height: m.height }} />
+        </div>
+      )}
       {m.kind === "spec" && (
         <div className="frame spec">
           <div className="stats">

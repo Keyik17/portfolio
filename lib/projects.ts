@@ -5,7 +5,9 @@ export type Media =
   // A row of phone-width screens.
   | { kind: "phones"; items: { src: string; alt: string }[]; caption?: string }
   // Typographic panel for code work that has no screenshots.
-  | { kind: "spec"; caption?: string; data?: Spec };
+  | { kind: "spec"; caption?: string; data?: Spec }
+  // A live page shown in a frame you can click around in.
+  | { kind: "embed"; src: string; title: string; height: number; caption?: string };
 
 export type Spec = { stats: { value: string; label: string }[]; stack: [string, string][] };
 
@@ -341,7 +343,7 @@ export const projects: Project[] = [
   {
     slug: "nsac",
     title: "Nebraska Strategic Ag Coalition",
-    summary: "My capstone: a platform that gathers farm programs, events and advisors from many agencies in one place.",
+    summary: "My capstone: one place for Nebraska farmers to find programs, events and local help.",
     tags: ["full-stack", "backend", "capstone", "team project"],
     cover: w("nsac", "cover"),
     live: { href: "https://nsac.nsac.workers.dev/directory", label: "nsac.nsac.workers.dev" },
@@ -351,19 +353,15 @@ export const projects: Project[] = [
       { label: "Stack", value: "TanStack Start, Convex, Cloudflare Workers" },
     ],
     body: [
-      "For my senior design capstone, our team is rebuilding the Nebraska Strategic Ag Coalition website as a working platform. It brings cost-share programs, events, producer networks, learning material and technical advisors from dozens of agencies into one place, so farmers can find what fits their operation.",
-      "I worked across the whole stack. On the backend: a Convex database with 22 tables, staff accounts with roles, file uploads to Cloudflare R2, scheduled jobs that refresh commodity prices and roll up page views, and email alerts by topic. On the front end: filterable views with shareable URLs, a county map of Nebraska and a component library in Storybook. GitHub Actions checks every pull request and deploys the backend and the site from main.",
-      "To help the team find their way around, I also made an interactive field guide that walks through the repo, the tools, how we test and how code gets shipped. A few screens from it are below.",
-      "The technical support directory is live, and the rest of the platform is still being finished.",
+      "Our senior design team is rebuilding the Nebraska Strategic Ag Coalition website so farmers can find cost-share programs, events, networks and local advisors in one place.",
+      "I worked on both ends: the Convex database, scheduled jobs, staff accounts and file uploads on the back end, and the pages and county map on the front end. I also set up Storybook and the GitHub Actions that check and deploy our work.",
+      "To help teammates learn the project, I made a small interactive guide. You can click through it below.",
     ],
     media: [
+      { kind: "embed", src: "/work/nsac/guide.html", title: "NSAC field guide", height: 820, caption: "Field guide for the team, try the tabs" },
       { kind: "page", src: w("nsac", "live-full"), alt: "Technical support directory", caption: "Technical support directory, live" },
       { kind: "spec", caption: "Backend and tooling", data: nsacSpec },
       { kind: "image", src: w("nsac", "storybook"), alt: "Nebraska county map component in Storybook", caption: "Component library in Storybook" },
-      { kind: "image", src: w("nsac", "guide-repo"), alt: "Field guide: an explorer of the repo with the website and backend folders", caption: "Field guide: the repo" },
-      { kind: "image", src: w("nsac", "guide-tools"), alt: "Field guide: each tool shown against one page and its code", caption: "Field guide: how the tools fit together" },
-      { kind: "image", src: w("nsac", "guide-shipping"), alt: "Field guide: a branch moving from local to playground to live", caption: "Field guide: from a branch to the live site" },
-      { kind: "image", src: w("nsac", "guide-testing"), alt: "Field guide: the four kinds of tests as a pyramid", caption: "Field guide: how we test" },
       {
         kind: "phones",
         caption: "Mobile",
