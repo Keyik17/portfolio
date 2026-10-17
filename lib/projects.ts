@@ -343,7 +343,7 @@ export const projects: Project[] = [
   {
     slug: "nsac",
     title: "Nebraska Strategic Ag Coalition",
-    summary: "My capstone: one place for Nebraska farmers to find programs, events and local help.",
+    summary: "A capstone project: one place for Nebraska farmers to find programs, events and local help.",
     tags: ["full-stack", "backend", "capstone", "team project"],
     cover: w("nsac", "cover"),
     live: { href: "https://nsac.nsac.workers.dev/directory", label: "nsac.nsac.workers.dev" },
@@ -354,8 +354,8 @@ export const projects: Project[] = [
     ],
     body: [
       "Our senior design team is rebuilding the Nebraska Strategic Ag Coalition website so farmers can find cost-share programs, events, networks and local advisors in one place.",
-      "I worked on both ends: the Convex database, scheduled jobs, staff accounts and file uploads on the back end, and the pages and county map on the front end. I also set up Storybook and the GitHub Actions that check and deploy our work.",
-      "To help teammates learn the project, I made a small interactive guide. You can click through it below.",
+      "Work on both ends: the Convex database, scheduled jobs, staff accounts and file uploads on the back end, the pages and county map on the front end, plus Storybook and the GitHub Actions that check and deploy our work.",
+      "A small interactive guide helps teammates learn the project. You can click through it below.",
     ],
     media: [
       { kind: "embed", src: "/work/nsac/guide.html", title: "NSAC field guide", height: 820, caption: "Field guide for the team, try the tabs" },
