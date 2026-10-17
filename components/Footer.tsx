@@ -31,7 +31,7 @@ export function Footer() {
         </p>
       </div>
 
-      <p className="toys-hint">Drag or boop the cats</p>
+      <p className="toys-hint">Meet my cats... hehe &gt;.&lt;</p>
       <CatToys />
     </footer>
   );

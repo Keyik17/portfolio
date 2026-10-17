@@ -30,7 +30,7 @@ export function Figure({ m }: { m: Media }) {
       {m.kind === "spec" && (
         <div className="frame spec">
           <div className="stats">
-            {platformSpec.stats.map((s) => (
+            {(m.data ?? platformSpec).stats.map((s) => (
               <div className="stat" key={s.label}>
                 <b>{s.value}</b>
                 <span>{s.label}</span>
@@ -39,7 +39,7 @@ export function Figure({ m }: { m: Media }) {
           </div>
           <table>
             <tbody>
-              {platformSpec.stack.map(([k, v]) => (
+              {(m.data ?? platformSpec).stack.map(([k, v]) => (
                 <tr key={k}>
                   <td>{k}</td>
                   <td>{v}</td>

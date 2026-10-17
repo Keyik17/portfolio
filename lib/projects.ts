@@ -5,7 +5,9 @@ export type Media =
   // A row of phone-width screens.
   | { kind: "phones"; items: { src: string; alt: string }[]; caption?: string }
   // Typographic panel for code work that has no screenshots.
-  | { kind: "spec"; caption?: string };
+  | { kind: "spec"; caption?: string; data?: Spec };
+
+export type Spec = { stats: { value: string; label: string }[]; stack: [string, string][] };
 
 export type Project = {
   slug: string;
@@ -22,6 +24,25 @@ export type Project = {
 };
 
 const w = (slug: string, file: string) => `/work/${slug}/${file}.webp`;
+
+const nsacSpec: Spec = {
+  stats: [
+    { value: "22", label: "database tables" },
+    { value: "312", label: "programs migrated" },
+    { value: "93", label: "counties mapped" },
+    { value: "2", label: "scheduled jobs" },
+  ],
+  stack: [
+    ["Frontend", "TanStack Start, React 19, Vite"],
+    ["Backend", "Convex: queries, mutations, cron jobs"],
+    ["Auth", "Better Auth, staff roles"],
+    ["Files", "Cloudflare R2"],
+    ["Hosting", "Cloudflare Workers"],
+    ["UI", "Tailwind 4, shadcn/ui, Storybook 10"],
+    ["Testing", "Vitest, Playwright"],
+    ["CI/CD", "GitHub Actions"],
+  ],
+};
 
 export const projects: Project[] = [
   {
@@ -315,6 +336,37 @@ export const projects: Project[] = [
       { kind: "image", src: w("bufete-juridico", "booking"), alt: "Consultation booking screen", caption: "Consultation booking, adapted from my booking widget" },
       { kind: "page", src: w("bufete-juridico", "design-full"), alt: "Original landing page design", caption: "Original design" },
       { kind: "page", src: w("bufete-juridico", "service-detail"), alt: "Family law service page design", caption: "Service detail template" },
+    ],
+  },
+  {
+    slug: "nsac",
+    title: "Nebraska Strategic Ag Coalition",
+    summary: "My capstone: a platform that gathers farm programs, events and advisors from many agencies in one place.",
+    tags: ["full-stack", "backend", "capstone", "team project"],
+    cover: w("nsac", "cover"),
+    live: { href: "https://nsac.nsac.workers.dev/directory", label: "nsac.nsac.workers.dev" },
+    meta: [
+      { label: "Type", value: "Senior design capstone" },
+      { label: "Role", value: "Full-stack development" },
+      { label: "Stack", value: "TanStack Start, Convex, Cloudflare Workers" },
+    ],
+    body: [
+      "For my senior design capstone, our team is rebuilding the Nebraska Strategic Ag Coalition website as a working platform. It brings cost-share programs, events, producer networks, learning material and technical advisors from dozens of agencies into one place, so farmers can find what fits their operation.",
+      "I worked across the whole stack. On the backend: a Convex database with 22 tables, staff accounts with roles, file uploads to Cloudflare R2, scheduled jobs that refresh commodity prices and roll up page views, and email alerts by topic. On the front end: filterable views with shareable URLs, a county map of Nebraska and a component library in Storybook. GitHub Actions checks every pull request and deploys the backend and the site from main.",
+      "The technical support directory is live, and the rest of the platform is still being finished.",
+    ],
+    media: [
+      { kind: "page", src: w("nsac", "live-full"), alt: "Technical support directory", caption: "Technical support directory, live" },
+      { kind: "spec", caption: "Backend and tooling", data: nsacSpec },
+      { kind: "image", src: w("nsac", "storybook"), alt: "Nebraska county map component in Storybook", caption: "Component library in Storybook" },
+      {
+        kind: "phones",
+        caption: "Mobile",
+        items: [
+          { src: w("nsac", "m1"), alt: "Directory on a phone" },
+          { src: w("nsac", "m2"), alt: "Advisor list on a phone" },
+        ],
+      },
     ],
   },
 ];
