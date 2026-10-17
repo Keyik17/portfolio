@@ -131,6 +131,38 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "nsac",
+    title: "Nebraska Strategic Ag Coalition",
+    summary: "A capstone project: one place for Nebraska farmers to find programs, events and local help.",
+    tags: ["full-stack", "backend", "capstone", "team project"],
+    cover: w("nsac", "cover"),
+    live: { href: "https://nsac.nsac.workers.dev/directory", label: "nsac.nsac.workers.dev" },
+    meta: [
+      { label: "Type", value: "Senior design capstone" },
+      { label: "Role", value: "Full-stack development" },
+      { label: "Stack", value: "TanStack Start, Convex, Cloudflare Workers" },
+    ],
+    body: [
+      "Our senior design team is rebuilding the Nebraska Strategic Ag Coalition website so farmers can find cost-share programs, events, networks and local advisors in one place.",
+      "Work on both ends: the Convex database, scheduled jobs, staff accounts and file uploads on the back end, the pages and county map on the front end, plus Storybook and the GitHub Actions that check and deploy our work.",
+      "A small interactive guide helps teammates learn the project. You can click through it below.",
+    ],
+    media: [
+      { kind: "embed", src: "/work/nsac/guide.html", title: "NSAC field guide", height: 820, caption: "Field guide for the team, try the tabs" },
+      { kind: "page", src: w("nsac", "live-full"), alt: "Technical support directory", caption: "Technical support directory, live" },
+      { kind: "spec", caption: "Backend and tooling", data: nsacSpec },
+      { kind: "image", src: w("nsac", "storybook"), alt: "Nebraska county map component in Storybook", caption: "Component library in Storybook" },
+      {
+        kind: "phones",
+        caption: "Mobile",
+        items: [
+          { src: w("nsac", "m1"), alt: "Directory on a phone" },
+          { src: w("nsac", "m2"), alt: "Advisor list on a phone" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "great-bunny",
     title: "Great Bunny",
     summary: "A website and quote flow for a family-owned drain cleaning company in Denver.",
@@ -338,38 +370,6 @@ export const projects: Project[] = [
       { kind: "image", src: w("bufete-juridico", "booking"), alt: "Consultation booking screen", caption: "Consultation booking, adapted from my booking widget" },
       { kind: "page", src: w("bufete-juridico", "design-full"), alt: "Original landing page design", caption: "Original design" },
       { kind: "page", src: w("bufete-juridico", "service-detail"), alt: "Family law service page design", caption: "Service detail template" },
-    ],
-  },
-  {
-    slug: "nsac",
-    title: "Nebraska Strategic Ag Coalition",
-    summary: "A capstone project: one place for Nebraska farmers to find programs, events and local help.",
-    tags: ["full-stack", "backend", "capstone", "team project"],
-    cover: w("nsac", "cover"),
-    live: { href: "https://nsac.nsac.workers.dev/directory", label: "nsac.nsac.workers.dev" },
-    meta: [
-      { label: "Type", value: "Senior design capstone" },
-      { label: "Role", value: "Full-stack development" },
-      { label: "Stack", value: "TanStack Start, Convex, Cloudflare Workers" },
-    ],
-    body: [
-      "Our senior design team is rebuilding the Nebraska Strategic Ag Coalition website so farmers can find cost-share programs, events, networks and local advisors in one place.",
-      "Work on both ends: the Convex database, scheduled jobs, staff accounts and file uploads on the back end, the pages and county map on the front end, plus Storybook and the GitHub Actions that check and deploy our work.",
-      "A small interactive guide helps teammates learn the project. You can click through it below.",
-    ],
-    media: [
-      { kind: "embed", src: "/work/nsac/guide.html", title: "NSAC field guide", height: 820, caption: "Field guide for the team, try the tabs" },
-      { kind: "page", src: w("nsac", "live-full"), alt: "Technical support directory", caption: "Technical support directory, live" },
-      { kind: "spec", caption: "Backend and tooling", data: nsacSpec },
-      { kind: "image", src: w("nsac", "storybook"), alt: "Nebraska county map component in Storybook", caption: "Component library in Storybook" },
-      {
-        kind: "phones",
-        caption: "Mobile",
-        items: [
-          { src: w("nsac", "m1"), alt: "Directory on a phone" },
-          { src: w("nsac", "m2"), alt: "Advisor list on a phone" },
-        ],
-      },
     ],
   },
 ];
