@@ -170,6 +170,39 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "great-snake",
+    title: "Great Snake",
+    summary: "A website and quote flow for a family-owned drain cleaning company in Denver.",
+    tags: ["web design", "front-end", "react", "client work"],
+    cover: w("great-snake", "cover"),
+    live: { href: "https://great-snake.pages.dev/", label: "great-snake.pages.dev" },
+    meta: [
+      { label: "Type", value: "Client site" },
+      { label: "Role", value: "Design, front-end" },
+      { label: "Stack", value: "React, TanStack Start, Vite, Cloudflare" },
+    ],
+    body: [
+      "Great Snake is a small drain cleaning business serving Denver, Lakewood, Arvada and Boulder. They needed a site that looks as trustworthy as their reviews and makes it easy to call or ask for a quote.",
+      "I designed the pages in pen.dev and built them out: a clean white layout with a handwritten accent, service and location pages, a FAQ, and a short quote wizard where people pick a service, the timing and optional photos before sending their details.",
+    ],
+    media: [
+      { kind: "page", src: w("great-snake", "live-full"), alt: "Great Snake homepage", caption: "Homepage, scroll inside the frame" },
+      {
+        kind: "phones",
+        caption: "Mobile",
+        items: [
+          { src: w("great-snake", "m1"), alt: "Homepage on a phone" },
+          { src: w("great-snake", "m2"), alt: "Services on a phone" },
+          { src: w("great-snake", "m3"), alt: "Why choose Great Snake on a phone" },
+          { src: w("great-snake", "m4"), alt: "Quote wizard on a phone" },
+        ],
+      },
+      { kind: "image", src: w("great-snake", "quote"), alt: "Quote wizard, first step", caption: "Quote wizard" },
+      { kind: "page", src: w("great-snake", "service"), alt: "Sewer drain cleaning service page", caption: "Service page" },
+      { kind: "page", src: w("great-snake", "location"), alt: "Denver location page", caption: "Location page" },
+    ],
+  },
+  {
     slug: "roundtrip",
     title: "Roundtrip",
     summary: "A landing page for a service that turns a coffee shop's guest Wi-Fi into a list of regulars.",

@@ -24,7 +24,7 @@ export default function About() {
         landing page with a bit of play in it.
       </p>
       <p>
-        So far I have designed websites for a diesel repair crew, a parcel shipper, law firms and a med spa. During my
+        So far I have designed websites for a diesel repair crew, a drain cleaning company, a parcel shipper, law firms and a med spa. During my
         internship I also helped on the code side, on a multi-tenant platform that runs those websites and their scheduling.
       </p>
 
