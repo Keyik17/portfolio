@@ -353,12 +353,17 @@ export const projects: Project[] = [
     body: [
       "For my senior design capstone, our team is rebuilding the Nebraska Strategic Ag Coalition website as a working platform. It brings cost-share programs, events, producer networks, learning material and technical advisors from dozens of agencies into one place, so farmers can find what fits their operation.",
       "I worked across the whole stack. On the backend: a Convex database with 22 tables, staff accounts with roles, file uploads to Cloudflare R2, scheduled jobs that refresh commodity prices and roll up page views, and email alerts by topic. On the front end: filterable views with shareable URLs, a county map of Nebraska and a component library in Storybook. GitHub Actions checks every pull request and deploys the backend and the site from main.",
+      "To help the team find their way around, I also made an interactive field guide that walks through the repo, the tools, how we test and how code gets shipped. A few screens from it are below.",
       "The technical support directory is live, and the rest of the platform is still being finished.",
     ],
     media: [
       { kind: "page", src: w("nsac", "live-full"), alt: "Technical support directory", caption: "Technical support directory, live" },
       { kind: "spec", caption: "Backend and tooling", data: nsacSpec },
       { kind: "image", src: w("nsac", "storybook"), alt: "Nebraska county map component in Storybook", caption: "Component library in Storybook" },
+      { kind: "image", src: w("nsac", "guide-repo"), alt: "Field guide: an explorer of the repo with the website and backend folders", caption: "Field guide: the repo" },
+      { kind: "image", src: w("nsac", "guide-tools"), alt: "Field guide: each tool shown against one page and its code", caption: "Field guide: how the tools fit together" },
+      { kind: "image", src: w("nsac", "guide-shipping"), alt: "Field guide: a branch moving from local to playground to live", caption: "Field guide: from a branch to the live site" },
+      { kind: "image", src: w("nsac", "guide-testing"), alt: "Field guide: the four kinds of tests as a pyramid", caption: "Field guide: how we test" },
       {
         kind: "phones",
         caption: "Mobile",
