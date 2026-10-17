@@ -10,6 +10,15 @@ const sans = Host_Grotesk({ subsets: ["latin"], variable: "--font-sans", weight:
 export const metadata: Metadata = {
   title: { default: `${site.name} | ${site.role}`, template: `%s | ${site.name}` },
   description: site.intro,
+  metadataBase: new URL("https://keyik.dev"),
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: `${site.name} | ${site.role}`,
+    description: site.intro,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name}, ${site.role.toLowerCase()}` }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og.png"] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
