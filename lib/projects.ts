@@ -25,185 +25,6 @@ const w = (slug: string, file: string) => `/work/${slug}/${file}.webp`;
 
 export const projects: Project[] = [
   {
-    slug: "bufete-juridico",
-    live: { href: "https://bufetejuridico.biz/en", label: "bufetejuridico.biz" },
-    title: "Bufete Jurídico JR",
-    summary: "A bilingual website and booking flow for a law firm in La Ceiba, Honduras.",
-    tags: ["web design", "next.js", "bilingual", "internship"],
-    cover: w("bufete-juridico", "cover"),
-    meta: [
-      { label: "Context", value: "Internship · IDKWebsites" },
-      { label: "Role", value: "Design, front-end" },
-      { label: "Stack", value: "Next.js, Tailwind, shared platform widgets" },
-    ],
-    body: [
-      "Bufete Jurídico JR wanted a site that felt calm and trustworthy: deep green, warm copper accents, and a serif that reads well in both English and Spanish.",
-      "I worked on the landing page, a service page template and a version of the booking widget, so clients can choose a practice area, an attorney and a time. The live site runs on the IDKWebsites tenant template and stays close to the original design.",
-    ],
-    media: [
-      { kind: "page", src: w("bufete-juridico", "live-full"), alt: "Bufete Jurídico JR live homepage", caption: "Live site, scroll inside the frame" },
-      {
-        kind: "phones",
-        caption: "Live site on a phone",
-        items: [
-          { src: w("bufete-juridico", "m1"), alt: "Homepage on a phone" },
-          { src: w("bufete-juridico", "m2"), alt: "Services on a phone" },
-          { src: w("bufete-juridico", "m3"), alt: "About the firm on a phone" },
-          { src: w("bufete-juridico", "m4"), alt: "Contact on a phone" },
-        ],
-      },
-      { kind: "image", src: w("bufete-juridico", "booking"), alt: "Consultation booking screen", caption: "Consultation booking, adapted from my booking widget" },
-      { kind: "page", src: w("bufete-juridico", "design-full"), alt: "Original landing page design", caption: "Original design" },
-      { kind: "page", src: w("bufete-juridico", "service-detail"), alt: "Family law service page design", caption: "Service detail template" },
-    ],
-  },
-  {
-    slug: "idkwebsites-platform",
-    title: "IDKWebsites Platform",
-    summary: "A multi-tenant website and scheduling platform for appointment-based small businesses.",
-    tags: ["next.js", "payload cms", "postgres", "internship"],
-    cover: "",
-    meta: [
-      { label: "Context", value: "Internship · IDKWebsites" },
-      { label: "Role", value: "Engineering" },
-      { label: "Stack", value: "Next.js 15, Payload CMS 3, PostgreSQL, Tailwind" },
-      { label: "Repo", value: "multitenant-cms", href: "https://github.com/yimeric7/multitenant-cms" },
-    ],
-    body: [
-      "During my internship I helped on a codebase that runs a website, a booking engine and an admin dashboard for each tenant, such as salons, med spas and consultants. One update reaches every site.",
-      "Sites are put together from modular blocks, so each one can look different while owners only edit text and images. The booking widget I designed is part of the shared components that tenant sites like Bufete Jurídico JR use.",
-    ],
-    media: [
-      { kind: "spec", caption: "System at a glance" },
-      { kind: "image", src: w("bufete-juridico", "booking"), alt: "Booking widget running in a tenant site", caption: "The shared booking widget, themed for a tenant site" },
-    ],
-  },
-  {
-    slug: "mobile-mechanics",
-    live: { href: "https://torq-mobile-concept.pages.dev/", label: "torq-mobile-concept.pages.dev" },
-    title: "Mobile Mechanics",
-    summary: "A website redesign for a 24/7 mobile diesel and heavy-duty truck repair crew in Nebraska.",
-    tags: ["web design", "design system", "responsive"],
-    cover: w("mobile-mechanics", "cover"),
-    meta: [
-      { label: "Client", value: "Mobile Mechanics" },
-      { label: "Role", value: "Design" },
-      { label: "Scope", value: "12 pages, mobile, style guide" },
-      { label: "Tools", value: "pen.dev" },
-    ],
-    body: [
-      "The crew comes to the truck, on the roadside or in the yard, day or night. The redesign tries to make that clear right away: one dispatch button, the 90-minute promise, and photos of the trucks they work on.",
-      "The design covers the landing page, services, service and city pages, about, contact, FAQ, field notes and legal pages, along with a mobile layout and a small style guide in forest green and copper.",
-    ],
-    media: [
-      { kind: "page", src: w("mobile-mechanics", "landing-full"), alt: "Mobile Mechanics landing page", caption: "Landing page" },
-      {
-        kind: "phones",
-        caption: "Mobile",
-        items: [
-          { src: w("mobile-mechanics", "m1"), alt: "Mobile landing page" },
-          { src: w("mobile-mechanics", "m2"), alt: "Why us section" },
-          { src: w("mobile-mechanics", "m3"), alt: "Service area section" },
-          { src: w("mobile-mechanics", "m4"), alt: "Lincoln coverage section" },
-        ],
-      },
-      { kind: "page", src: w("mobile-mechanics", "services"), alt: "Mobile Mechanics services page", caption: "Services" },
-      { kind: "page", src: w("mobile-mechanics", "about"), alt: "Mobile Mechanics about page", caption: "About" },
-      { kind: "image", src: w("mobile-mechanics", "style-guide"), alt: "Mobile Mechanics style guide", caption: "Style guide" },
-    ],
-  },
-  {
-    slug: "booking-widget",
-    live: { href: "https://booking-widget-demo.pages.dev/", label: "booking-widget-demo.pages.dev" },
-    title: "Booking Widget",
-    summary: "A simple three-step booking flow that can take on any brand.",
-    tags: ["product design", "ui", "component"],
-    cover: w("booking-widget", "cover"),
-    meta: [
-      { label: "Role", value: "Design" },
-      { label: "Platforms", value: "Desktop, mobile" },
-      { label: "Used in", value: "Bufete Jurídico JR, Petal & Glow, Mitchell & Associates" },
-    ],
-    body: [
-      "Service, then date and time, then details. On desktop the three steps share one tabbed screen with a running summary. On mobile they become three short steps.",
-      "It stays quiet on purpose, with neutral greys and one accent, so it can adapt to a client's colors and type without a redesign.",
-    ],
-    media: [
-      { kind: "image", src: w("booking-widget", "desktop"), alt: "Desktop booking widget", caption: "Desktop, one tabbed screen" },
-      {
-        kind: "phones",
-        caption: "Mobile: specialist, services, date & time, details",
-        items: [
-          { src: w("booking-widget", "m1"), alt: "Step 1: pick a service" },
-          { src: w("booking-widget", "m2"), alt: "Step 2: pick services" },
-          { src: w("booking-widget", "m3"), alt: "Step 2: pick a date and time" },
-          { src: w("booking-widget", "m4"), alt: "Step 3: enter details" },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "encomiendas",
-    live: { href: "https://www.encomiendaslatina.com/", label: "encomiendaslatina.com" },
-    title: "Encomiendas America Latina",
-    summary: "A Spanish-first website for a Lincoln, Nebraska parcel shipper serving families across Latin America.",
-    tags: ["web design", "bilingual", "live"],
-    cover: w("encomiendas", "cover"),
-    meta: [
-      { label: "Client", value: "Encomiendas America Latina" },
-      { label: "Role", value: "Design" },
-    ],
-    body: [
-      "“Envía con confianza.” The site is made for people sending boxes home: destinations, tracking and drop-off booking near the top, a language switch in the corner, and a WhatsApp button always close by.",
-    ],
-    media: [
-      { kind: "page", src: w("encomiendas", "live-full"), alt: "Encomiendas America Latina homepage", caption: "Live site, scroll inside the frame" },
-      {
-        kind: "phones",
-        caption: "Live site on a phone",
-        items: [
-          { src: w("encomiendas", "m1"), alt: "Homepage on a phone" },
-          { src: w("encomiendas", "m2"), alt: "How it works on a phone" },
-          { src: w("encomiendas", "m3"), alt: "Destinations on a phone" },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "great-bunny",
-    title: "Great Bunny",
-    summary: "A website and quote flow for a family-owned drain cleaning company in Denver.",
-    tags: ["web design", "front-end", "react", "client work"],
-    cover: w("great-bunny", "cover"),
-    live: { href: "https://great-bunny.pages.dev/", label: "great-bunny.pages.dev" },
-    meta: [
-      { label: "Type", value: "Client site" },
-      { label: "Role", value: "Design, front-end" },
-      { label: "Stack", value: "React, TanStack Start, Vite, Cloudflare" },
-      { label: "Repo", value: "great-bunny", href: "https://github.com/Keyik17/great-bunny" },
-    ],
-    body: [
-      "Great Bunny is a small drain cleaning business serving Denver, Lakewood, Arvada and Boulder. They needed a site that looks as trustworthy as their reviews and makes it easy to call or ask for a quote.",
-      "I designed the pages in pen.dev and built them out: a clean white layout with a handwritten accent, service and location pages, a FAQ, and a short quote wizard where people pick a service, the timing and optional photos before sending their details.",
-    ],
-    media: [
-      { kind: "page", src: w("great-bunny", "live-full"), alt: "Great Bunny homepage", caption: "Homepage, scroll inside the frame" },
-      {
-        kind: "phones",
-        caption: "Mobile",
-        items: [
-          { src: w("great-bunny", "m1"), alt: "Homepage on a phone" },
-          { src: w("great-bunny", "m2"), alt: "Services on a phone" },
-          { src: w("great-bunny", "m3"), alt: "Why choose Great Bunny on a phone" },
-          { src: w("great-bunny", "m4"), alt: "Quote wizard on a phone" },
-        ],
-      },
-      { kind: "image", src: w("great-bunny", "quote"), alt: "Quote wizard, first step", caption: "Quote wizard" },
-      { kind: "page", src: w("great-bunny", "service"), alt: "Sewer drain cleaning service page", caption: "Service page" },
-      { kind: "page", src: w("great-bunny", "location"), alt: "Denver location page", caption: "Location page" },
-    ],
-  },
-  {
     slug: "roundtrip",
     title: "Roundtrip",
     summary: "A landing page for a service that turns a coffee shop's guest Wi-Fi into a list of regulars.",
@@ -287,6 +108,40 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "great-bunny",
+    title: "Great Bunny",
+    summary: "A website and quote flow for a family-owned drain cleaning company in Denver.",
+    tags: ["web design", "front-end", "react", "client work"],
+    cover: w("great-bunny", "cover"),
+    live: { href: "https://great-bunny.pages.dev/", label: "great-bunny.pages.dev" },
+    meta: [
+      { label: "Type", value: "Client site" },
+      { label: "Role", value: "Design, front-end" },
+      { label: "Stack", value: "React, TanStack Start, Vite, Cloudflare" },
+      { label: "Repo", value: "great-bunny", href: "https://github.com/Keyik17/great-bunny" },
+    ],
+    body: [
+      "Great Bunny is a small drain cleaning business serving Denver, Lakewood, Arvada and Boulder. They needed a site that looks as trustworthy as their reviews and makes it easy to call or ask for a quote.",
+      "I designed the pages in pen.dev and built them out: a clean white layout with a handwritten accent, service and location pages, a FAQ, and a short quote wizard where people pick a service, the timing and optional photos before sending their details.",
+    ],
+    media: [
+      { kind: "page", src: w("great-bunny", "live-full"), alt: "Great Bunny homepage", caption: "Homepage, scroll inside the frame" },
+      {
+        kind: "phones",
+        caption: "Mobile",
+        items: [
+          { src: w("great-bunny", "m1"), alt: "Homepage on a phone" },
+          { src: w("great-bunny", "m2"), alt: "Services on a phone" },
+          { src: w("great-bunny", "m3"), alt: "Why choose Great Bunny on a phone" },
+          { src: w("great-bunny", "m4"), alt: "Quote wizard on a phone" },
+        ],
+      },
+      { kind: "image", src: w("great-bunny", "quote"), alt: "Quote wizard, first step", caption: "Quote wizard" },
+      { kind: "page", src: w("great-bunny", "service"), alt: "Sewer drain cleaning service page", caption: "Service page" },
+      { kind: "page", src: w("great-bunny", "location"), alt: "Denver location page", caption: "Location page" },
+    ],
+  },
+  {
     slug: "mitchell",
     live: { href: "https://mitchell-concept.pages.dev/", label: "mitchell-concept.pages.dev" },
     title: "Mitchell & Associates",
@@ -315,6 +170,151 @@ export const projects: Project[] = [
       },
       { kind: "page", src: w("mitchell", "about"), alt: "About and team page", caption: "About / Team" },
       { kind: "image", src: w("mitchell", "style-guide"), alt: "Style guide", caption: "Style guide" },
+    ],
+  },
+  {
+    slug: "mobile-mechanics",
+    live: { href: "https://torq-mobile-concept.pages.dev/", label: "torq-mobile-concept.pages.dev" },
+    title: "Mobile Mechanics",
+    summary: "A website redesign for a 24/7 mobile diesel and heavy-duty truck repair crew in Nebraska.",
+    tags: ["web design", "design system", "responsive"],
+    cover: w("mobile-mechanics", "cover"),
+    meta: [
+      { label: "Client", value: "Mobile Mechanics" },
+      { label: "Role", value: "Design" },
+      { label: "Scope", value: "12 pages, mobile, style guide" },
+      { label: "Tools", value: "pen.dev" },
+    ],
+    body: [
+      "The crew comes to the truck, on the roadside or in the yard, day or night. The redesign tries to make that clear right away: one dispatch button, the 90-minute promise, and photos of the trucks they work on.",
+      "The design covers the landing page, services, service and city pages, about, contact, FAQ, field notes and legal pages, along with a mobile layout and a small style guide in forest green and copper.",
+    ],
+    media: [
+      { kind: "page", src: w("mobile-mechanics", "landing-full"), alt: "Mobile Mechanics landing page", caption: "Landing page" },
+      {
+        kind: "phones",
+        caption: "Mobile",
+        items: [
+          { src: w("mobile-mechanics", "m1"), alt: "Mobile landing page" },
+          { src: w("mobile-mechanics", "m2"), alt: "Why us section" },
+          { src: w("mobile-mechanics", "m3"), alt: "Service area section" },
+          { src: w("mobile-mechanics", "m4"), alt: "Lincoln coverage section" },
+        ],
+      },
+      { kind: "page", src: w("mobile-mechanics", "services"), alt: "Mobile Mechanics services page", caption: "Services" },
+      { kind: "page", src: w("mobile-mechanics", "about"), alt: "Mobile Mechanics about page", caption: "About" },
+      { kind: "image", src: w("mobile-mechanics", "style-guide"), alt: "Mobile Mechanics style guide", caption: "Style guide" },
+    ],
+  },
+  {
+    slug: "idkwebsites-platform",
+    title: "IDKWebsites Platform",
+    summary: "A multi-tenant website and scheduling platform for appointment-based small businesses.",
+    tags: ["next.js", "payload cms", "postgres", "internship"],
+    cover: "",
+    meta: [
+      { label: "Context", value: "Internship · IDKWebsites" },
+      { label: "Role", value: "Engineering" },
+      { label: "Stack", value: "Next.js 15, Payload CMS 3, PostgreSQL, Tailwind" },
+      { label: "Repo", value: "multitenant-cms", href: "https://github.com/yimeric7/multitenant-cms" },
+    ],
+    body: [
+      "During my internship I helped on a codebase that runs a website, a booking engine and an admin dashboard for each tenant, such as salons, med spas and consultants. One update reaches every site.",
+      "Sites are put together from modular blocks, so each one can look different while owners only edit text and images. The booking widget I designed is part of the shared components that tenant sites like Bufete Jurídico JR use.",
+    ],
+    media: [
+      { kind: "spec", caption: "System at a glance" },
+      { kind: "image", src: w("bufete-juridico", "booking"), alt: "Booking widget running in a tenant site", caption: "The shared booking widget, themed for a tenant site" },
+    ],
+  },
+  {
+    slug: "booking-widget",
+    live: { href: "https://booking-widget-demo.pages.dev/", label: "booking-widget-demo.pages.dev" },
+    title: "Booking Widget",
+    summary: "A simple three-step booking flow that can take on any brand.",
+    tags: ["product design", "ui", "component"],
+    cover: w("booking-widget", "cover"),
+    meta: [
+      { label: "Role", value: "Design" },
+      { label: "Platforms", value: "Desktop, mobile" },
+      { label: "Used in", value: "Bufete Jurídico JR, Petal & Glow, Mitchell & Associates" },
+    ],
+    body: [
+      "Service, then date and time, then details. On desktop the three steps share one tabbed screen with a running summary. On mobile they become three short steps.",
+      "It stays quiet on purpose, with neutral greys and one accent, so it can adapt to a client's colors and type without a redesign.",
+    ],
+    media: [
+      { kind: "image", src: w("booking-widget", "desktop"), alt: "Desktop booking widget", caption: "Desktop, one tabbed screen" },
+      {
+        kind: "phones",
+        caption: "Mobile: specialist, services, date & time, details",
+        items: [
+          { src: w("booking-widget", "m1"), alt: "Step 1: pick a service" },
+          { src: w("booking-widget", "m2"), alt: "Step 2: pick services" },
+          { src: w("booking-widget", "m3"), alt: "Step 2: pick a date and time" },
+          { src: w("booking-widget", "m4"), alt: "Step 3: enter details" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "encomiendas",
+    live: { href: "https://www.encomiendaslatina.com/", label: "encomiendaslatina.com" },
+    title: "Encomiendas America Latina",
+    summary: "A Spanish-first website for a Lincoln, Nebraska parcel shipper serving families across Latin America.",
+    tags: ["web design", "bilingual", "live"],
+    cover: w("encomiendas", "cover"),
+    meta: [
+      { label: "Client", value: "Encomiendas America Latina" },
+      { label: "Role", value: "Design" },
+    ],
+    body: [
+      "“Envía con confianza.” The site is made for people sending boxes home: destinations, tracking and drop-off booking near the top, a language switch in the corner, and a WhatsApp button always close by.",
+    ],
+    media: [
+      { kind: "page", src: w("encomiendas", "live-full"), alt: "Encomiendas America Latina homepage", caption: "Live site, scroll inside the frame" },
+      {
+        kind: "phones",
+        caption: "Live site on a phone",
+        items: [
+          { src: w("encomiendas", "m1"), alt: "Homepage on a phone" },
+          { src: w("encomiendas", "m2"), alt: "How it works on a phone" },
+          { src: w("encomiendas", "m3"), alt: "Destinations on a phone" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "bufete-juridico",
+    live: { href: "https://bufetejuridico.biz/en", label: "bufetejuridico.biz" },
+    title: "Bufete Jurídico JR",
+    summary: "A bilingual website and booking flow for a law firm in La Ceiba, Honduras.",
+    tags: ["web design", "next.js", "bilingual", "internship"],
+    cover: w("bufete-juridico", "cover"),
+    meta: [
+      { label: "Context", value: "Internship · IDKWebsites" },
+      { label: "Role", value: "Design, front-end" },
+      { label: "Stack", value: "Next.js, Tailwind, shared platform widgets" },
+    ],
+    body: [
+      "Bufete Jurídico JR wanted a site that felt calm and trustworthy: deep green, warm copper accents, and a serif that reads well in both English and Spanish.",
+      "I worked on the landing page, a service page template and a version of the booking widget, so clients can choose a practice area, an attorney and a time. The live site runs on the IDKWebsites tenant template and stays close to the original design.",
+    ],
+    media: [
+      { kind: "page", src: w("bufete-juridico", "live-full"), alt: "Bufete Jurídico JR live homepage", caption: "Live site, scroll inside the frame" },
+      {
+        kind: "phones",
+        caption: "Live site on a phone",
+        items: [
+          { src: w("bufete-juridico", "m1"), alt: "Homepage on a phone" },
+          { src: w("bufete-juridico", "m2"), alt: "Services on a phone" },
+          { src: w("bufete-juridico", "m3"), alt: "About the firm on a phone" },
+          { src: w("bufete-juridico", "m4"), alt: "Contact on a phone" },
+        ],
+      },
+      { kind: "image", src: w("bufete-juridico", "booking"), alt: "Consultation booking screen", caption: "Consultation booking, adapted from my booking widget" },
+      { kind: "page", src: w("bufete-juridico", "design-full"), alt: "Original landing page design", caption: "Original design" },
+      { kind: "page", src: w("bufete-juridico", "service-detail"), alt: "Family law service page design", caption: "Service detail template" },
     ],
   },
 ];
