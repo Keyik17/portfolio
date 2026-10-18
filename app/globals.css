@@ -183,7 +183,6 @@ img { display: block; max-width: 100%; }
 .list .row:hover, .list .row:focus-visible { opacity: 1; }
 .row h2 { font: inherit; font-weight: 500; margin: 0; }
 .row p { margin: 0; color: var(--faint); text-align: right; flex-shrink: 0; }
-.row-thumb { display: none; }
 .row .num { color: var(--faint); font-variant-numeric: tabular-nums; margin-right: 18px; font-weight: 400; }
 
 .peek {
@@ -238,7 +237,7 @@ img { display: block; max-width: 100%; }
 .code-tile span:last-child { color: #7fd18b; }
 
 /* ---------- walkthroughs ---------- */
-.reel { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.reel { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .reel-tile { all: unset; cursor: pointer; display: block; width: 100%; }
 .reel-thumb { display: block; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: var(--frame); }
 .reel-thumb video { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
@@ -260,7 +259,7 @@ img { display: block; max-width: 100%; }
   animation: fade 0.35s var(--ease) both;
   cursor: zoom-out;
 }
-.reel-box video { width: min(1100px, 100%); max-height: 86vh; border-radius: 10px; background: #000; cursor: auto; }
+.reel-box video { width: min(1440px, 100%); max-height: 90vh; border-radius: 10px; background: #000; cursor: auto; }
 
 /* ---------- frames & case study ---------- */
 .frame {
@@ -283,6 +282,13 @@ img { display: block; max-width: 100%; }
 .visit i { font-style: normal; transition: transform .25s var(--ease); }
 .visit:hover { opacity: .85; }
 .visit:hover i { transform: translate(2px, -2px); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.actions .visit { margin-top: 0; }
+.watch { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 8px 15px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); transition: background .2s; }
+.watch i { font-style: normal; font-size: 9px; }
+.watch:hover { background: var(--pill); }
+.watch:hover i { transform: none; }
+.watch:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
 .meta {
   display: grid;
@@ -372,25 +378,12 @@ figcaption { color: var(--faint); margin-top: 12px; }
   .page-frame { padding: 16px 16px 0; }
   .grid { grid-template-columns: 1fr; }
   .card .frame { padding: 14px; }
-  /* list stays a list: small thumb on the left, title and tags beside it */
-  .list li + li { border-top: 1px solid var(--line); }
-  .row {
-    display: grid;
-    grid-template-columns: 88px 1fr;
-    grid-template-rows: auto auto;
-    column-gap: 16px;
-    row-gap: 2px;
-    align-items: end;
-    padding: 14px 0;
-  }
-  .reel { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; margin-top: 32px; }
+  .reel { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
   .reel-box { padding: 12px; }
-  .row-thumb { display: block; grid-row: 1 / 3; align-self: center; width: 88px; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; background: var(--frame); }
-  .row-thumb .code-tile { font-size: 3px; padding: 6px; }
-  .row-thumb img, .row-thumb .code-tile { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 0; }
-  .row h2 { align-self: end; }
-  .row p { text-align: left; align-self: start; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .row .num { margin-right: 10px; }
+  /* plain list on phones: title, then tags underneath */
+  .list li + li { border-top: 1px solid var(--line); }
+  .row { flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 0; }
+  .row p { text-align: left; }
   .list:hover .row { opacity: 1; }
   /* a swipeable row instead of a squeezed grid */
   .phones {

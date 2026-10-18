@@ -9,7 +9,6 @@ export default function Home() {
       <p className="lede">
         {site.name}, {site.role.toLowerCase()}.
       </p>
-      <p className="lede">{site.intro}</p>
       <Reel />
       <WorkIndex projects={projects} />
     </div>

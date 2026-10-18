@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WatchButton } from "@/components/Reel";
 import { notFound, redirect } from "next/navigation";
 import { Figure } from "@/components/Figure";
 import { getProject, movedProjects, projects } from "@/lib/projects";
@@ -32,11 +33,14 @@ export default async function Work({ params }: { params: Promise<{ slug: string 
       </Link>
       <h1>{p.title}</h1>
       <p className="sum">{p.summary}</p>
-      {p.live && (
-        <a className="visit" href={p.live.href} target="_blank" rel="noreferrer">
-          Visit site <i aria-hidden>↗</i>
-        </a>
-      )}
+      <div className="actions">
+        {p.live && (
+          <a className="visit" href={p.live.href} target="_blank" rel="noreferrer">
+            Visit site <i aria-hidden>↗</i>
+          </a>
+        )}
+        <WatchButton slug={p.slug} />
+      </div>
 
       <dl className="meta">
         {p.meta.map((m) => (

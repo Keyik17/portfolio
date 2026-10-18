@@ -98,10 +98,6 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
           {projects.map((p, i) => (
             <li key={p.slug}>
               <Link href={`/work/${p.slug}/`} className="row" onPointerEnter={() => setHovered(p)}>
-                {/* phones have no hover preview, so rows carry their own thumbnail */}
-                <div className="row-thumb" aria-hidden>
-                  <Cover p={p} />
-                </div>
                 <h2>
                   <span className="num">{String(i + 1).padStart(2, "0")}</span>
                   {p.title}

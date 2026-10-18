@@ -1,0 +1,8 @@
+name = "keyik-portfolio"
+pages_build_output_dir = "out"
+compatibility_date = "2026-10-16"
+
+# Full-quality videos live in R2 (Pages caps static files at 25 MB).
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "keyik-media"
