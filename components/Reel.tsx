@@ -15,7 +15,8 @@ export const clips: Clip[] = [
 // Small copies for the hover previews; full-quality ones (in R2, served by keyik.dev) for watching.
 const src = (c: Clip, ext: string) => `/reel/${c.slug}.${ext}`;
 const host = process.env.NODE_ENV === "development" ? "https://keyik.dev" : "";
-const watch = (c: Clip) => `${host}/media/reel/${c.slug}.mp4`;
+// Bump v when the files in R2 are replaced; they are cached for a year.
+const watch = (c: Clip) => `${host}/media/reel/${c.slug}.mp4?v=2`;
 
 export function Reel() {
   const [open, setOpen] = useState<Clip | null>(null);
