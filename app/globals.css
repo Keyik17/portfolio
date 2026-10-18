@@ -418,7 +418,6 @@ figcaption { color: var(--faint); margin-top: 12px; }
 .about li span:last-child { color: var(--faint); text-align: right; }
 .news-grid { margin-top: 56px; }
 .news-grid .frame { display: block; }
-.card .news-text { color: var(--muted); margin-top: 8px; max-width: 46ch; }
 .news-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 8px; }
 .news-links a { color: var(--faint); transition: color .2s; }
 .news-links a:hover { color: var(--ink); }

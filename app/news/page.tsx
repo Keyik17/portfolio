@@ -15,7 +15,6 @@ export default function News() {
             </a>
             <h2>{n.title}</h2>
             <p>{n.when}</p>
-            <p className="news-text">{n.text}</p>
             <div className="news-links">
               {n.links.map(([label, href]) => (
                 <a key={href} href={href} target="_blank" rel="noreferrer">
