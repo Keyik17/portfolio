@@ -16,7 +16,9 @@ export const clips: Clip[] = [
 const src = (c: Clip, ext: string) => `/reel/${c.slug}.${ext}`;
 const full = (c: Clip) => `/media/reel/${c.slug}.mp4`;
 // Phones show the player a few hundred pixels wide, so the small copy looks the same there.
-const watch = (c: Clip) => (window.innerWidth < 900 ? src(c, "mp4") : full(c));
+// The full ones live in R2 and only exist on the deployed site, so local dev uses the small ones.
+const watch = (c: Clip) =>
+  window.innerWidth < 900 || process.env.NODE_ENV === "development" ? src(c, "mp4") : full(c);
 
 export function Reel() {
   const [open, setOpen] = useState<Clip | null>(null);
