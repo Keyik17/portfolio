@@ -12,13 +12,10 @@ export const clips: Clip[] = [
   { slug: "nsac", title: "NSAC" },
 ];
 
-// Small copies for the hover previews; full-quality ones for watching.
+// Small copies for the hover previews; full-quality ones (in R2, served by keyik.dev) for watching.
 const src = (c: Clip, ext: string) => `/reel/${c.slug}.${ext}`;
-const full = (c: Clip) => `/media/reel/${c.slug}.mp4`;
-// Phones show the player a few hundred pixels wide, so the small copy looks the same there.
-// The full ones live in R2 and only exist on the deployed site, so local dev uses the small ones.
-const watch = (c: Clip) =>
-  window.innerWidth < 900 || process.env.NODE_ENV === "development" ? src(c, "mp4") : full(c);
+const host = process.env.NODE_ENV === "development" ? "https://keyik.dev" : "";
+const watch = (c: Clip) => `${host}/media/reel/${c.slug}.mp4`;
 
 export function Reel() {
   const [open, setOpen] = useState<Clip | null>(null);
