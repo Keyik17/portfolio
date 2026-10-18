@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation";
 
 const items = [
   { href: "/", label: "works" },
+  { href: "/news/", label: "news" },
   { href: "/about/", label: "about" },
 ];
 
 export function Nav() {
   const path = usePathname();
   const active = (href: string) =>
-    href === "/" ? path === "/" || path.startsWith("/work") : href === "/about/" && path.startsWith("/about");
+    href === "/" ? path === "/" || path.startsWith("/work") : path.startsWith(href.slice(0, -1));
 
   return (
     <nav className="nav" aria-label="Primary">

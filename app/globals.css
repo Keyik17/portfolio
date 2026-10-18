@@ -416,10 +416,9 @@ figcaption { color: var(--faint); margin-top: 12px; }
 .about ul { list-style: none; padding: 0; margin: 0; max-width: var(--measure); }
 .about li { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-top: 1px solid var(--line); }
 .about li span:last-child { color: var(--faint); text-align: right; }
-.about .news li { display: block; padding: 14px 0 16px; }
-.news-head { display: flex; justify-content: space-between; gap: 24px; }
-.news-head span:last-child { color: var(--faint); text-align: right; flex-shrink: 0; }
-.about .news p { margin: 4px 0 0; max-width: 560px; color: var(--muted); }
+.news-grid { margin-top: 56px; }
+.news-grid .frame { display: block; }
+.card .news-text { color: var(--muted); margin-top: 8px; max-width: 46ch; }
 .news-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 8px; }
 .news-links a { color: var(--faint); transition: color .2s; }
 .news-links a:hover { color: var(--ink); }
