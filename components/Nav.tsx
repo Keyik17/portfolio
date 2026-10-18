@@ -15,6 +15,7 @@ export function Nav() {
 
   return (
     <nav className="nav" aria-label="Primary">
+      <Link href="/" className="mark" aria-label="Keyik, home" />
       {items.map((i) => (
         <Link key={i.href} href={i.href} aria-current={active(i.href) ? "page" : undefined}>
           {i.label}

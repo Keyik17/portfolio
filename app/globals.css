@@ -56,6 +56,18 @@ img { display: block; max-width: 100%; }
 }
 .nav a { color: var(--faint); width: fit-content; transition: color 0.2s; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--ink); }
+/* hand-drawn K, drawn in the text color so it flips in dark mode */
+.nav .mark {
+  display: block;
+  width: 58px;
+  aspect-ratio: 578 / 365;
+  margin: 0 0 18px -4px;
+  background: var(--ink);
+  -webkit-mask: url(/mark.png) center / contain no-repeat;
+  mask: url(/mark.png) center / contain no-repeat;
+  transition: opacity .2s;
+}
+.nav .mark:hover { opacity: .7; }
 
 .main {
   min-height: 100vh;
@@ -284,6 +296,29 @@ img { display: block; max-width: 100%; }
 .reel-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .reel-player.is-playing .reel-toggle { opacity: 0; }
 .reel-player.is-playing:hover .reel-toggle, .reel-player.is-playing .reel-toggle:focus-visible { opacity: 1; }
+.reel-expand {
+  all: unset;
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  bottom: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity .25s, background .2s;
+}
+.reel-expand:hover { background: rgba(0,0,0,.55); }
+.reel-expand:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.reel-player.is-playing .reel-expand { opacity: 0; }
+.reel-player.is-playing:hover .reel-expand, .reel-player.is-playing .reel-expand:focus-visible { opacity: 1; }
+.reel-player:fullscreen { border-radius: 0; display: grid; place-items: center; }
+.reel-player:fullscreen video { width: 100%; height: 100%; max-height: none; object-fit: contain; }
 .reel-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 14px; cursor: pointer; display: flex; align-items: flex-end; }
 .reel-progress::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.25); }
 .reel-progress span { position: relative; display: block; width: 100%; height: 3px; background: #fff; transform: scaleX(0); transform-origin: left; }
@@ -397,7 +432,9 @@ figcaption { color: var(--faint); margin-top: 12px; }
     background: color-mix(in srgb, var(--bg) 96%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    align-items: center;
   }
+  .nav .mark { width: 40px; margin: -4px auto -4px -2px; order: 0; }
   .content { padding-top: 32px; padding-bottom: 40px; }
   .frame { padding: 16px; border-radius: 12px; }
   .page-frame { padding: 16px 16px 0; }

@@ -74,6 +74,16 @@ function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
     else el.pause();
   };
 
+  const box = useRef<HTMLDivElement>(null);
+  const expand = () => {
+    const el = box.current as (HTMLDivElement & { webkitRequestFullscreen?: () => void }) | null;
+    const vid = v.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    if (document.fullscreenElement) return void document.exitFullscreen();
+    if (el?.requestFullscreen) el.requestFullscreen().catch(() => {});
+    else if (el?.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else vid?.webkitEnterFullscreen?.(); // iPhone only lets the video itself go full screen
+  };
+
   const seek = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = v.current;
     if (!el?.duration) return;
@@ -92,7 +102,7 @@ function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
         <button className="reel-back" onClick={onClose}>
           ← back
         </button>
-        <div className={`reel-player${playing ? " is-playing" : ""}`}>
+        <div ref={box} className={`reel-player${playing ? " is-playing" : ""}`}>
           <video
             ref={v}
             src={watch(clip)}
@@ -140,6 +150,20 @@ function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
                 />
               </svg>
             )}
+          </button>
+          <button className="reel-expand" onClick={expand} aria-label="Full screen">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              aria-hidden
+            >
+              <path d="M1.5 5V1.5H5M9 1.5h3.5V5M12.5 9v3.5H9M5 12.5H1.5V9" />
+            </svg>
           </button>
           <div
             className="reel-progress"
