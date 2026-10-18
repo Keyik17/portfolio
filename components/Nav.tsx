@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Mark } from "@/components/Mark";
 
 const items = [
   { href: "/", label: "works" },
@@ -16,7 +17,7 @@ export function Nav() {
 
   return (
     <nav className="nav" aria-label="Primary">
-      <Link href="/" className="mark" aria-label="Keyik, home" />
+      <Mark />
       {items.map((i) => (
         <Link key={i.href} href={i.href} aria-current={active(i.href) ? "page" : undefined}>
           {i.label}

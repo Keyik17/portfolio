@@ -6,10 +6,22 @@ import { createPortal } from "react-dom";
 import type { Project } from "@/lib/projects";
 
 type View = "list" | "grid";
+// The works index, also reused for the news list.
+type Item = Pick<Project, "slug" | "title" | "tags" | "cover">;
 
-export function WorkIndex({ projects }: { projects: Project[] }) {
+export function WorkIndex({
+  projects,
+  base = "/work",
+  label = "Selected work",
+  toggle = true,
+}: {
+  projects: Item[];
+  base?: string;
+  label?: string;
+  toggle?: boolean;
+}) {
   const [view, setView] = useState<View>("list");
-  const [hovered, setHovered] = useState<Project | null>(null);
+  const [hovered, setHovered] = useState<Item | null>(null);
   const peek = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -17,9 +29,9 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
   useEffect(() => {
     try {
       const saved = localStorage.getItem("view");
-      if (saved === "grid" || saved === "list") setView(saved);
+      if (toggle && (saved === "grid" || saved === "list")) setView(saved);
     } catch {}
-  }, []);
+  }, [toggle]);
 
   const choose = (v: View) => {
     setView(v);
@@ -30,7 +42,12 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
 
   // The preview trails the cursor with a little lag.
   useEffect(() => {
-    let px = -1, py = -1, cx = 0, cy = 0, raf = 0, first = true;
+    let px = -1,
+      py = -1,
+      cx = 0,
+      cy = 0,
+      raf = 0,
+      first = true;
     // Where the preview should sit for the current cursor. It always stays
     // fully on screen: it flips above or to the left of the cursor when there
     // is no room, then clamps to the window edges.
@@ -74,30 +91,58 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
   return (
     <>
       <div className="bar">
-        <small>Selected work</small>
-        <div className="toggle" role="group" aria-label="Layout">
-          <button aria-pressed={view === "list"} aria-label="List view" onClick={() => choose("list")}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
-              <rect x="1.5" y="2.5" width="11" height="3.5" rx="1" />
-              <rect x="1.5" y="8" width="11" height="3.5" rx="1" />
-            </svg>
-          </button>
-          <button aria-pressed={view === "grid"} aria-label="Grid view" onClick={() => choose("grid")}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
-              <rect x="1.5" y="1.5" width="4.5" height="4.5" rx="1.2" />
-              <rect x="8" y="1.5" width="4.5" height="4.5" rx="1.2" />
-              <rect x="1.5" y="8" width="4.5" height="4.5" rx="1.2" />
-              <rect x="8" y="8" width="4.5" height="4.5" rx="1.2" />
-            </svg>
-          </button>
-        </div>
+        <small>{label}</small>
+        {toggle && (
+          <div className="toggle" role="group" aria-label="Layout">
+            <button
+              aria-pressed={view === "list"}
+              aria-label="List view"
+              onClick={() => choose("list")}
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+              >
+                <rect x="1.5" y="2.5" width="11" height="3.5" rx="1" />
+                <rect x="1.5" y="8" width="11" height="3.5" rx="1" />
+              </svg>
+            </button>
+            <button
+              aria-pressed={view === "grid"}
+              aria-label="Grid view"
+              onClick={() => choose("grid")}
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+              >
+                <rect x="1.5" y="1.5" width="4.5" height="4.5" rx="1.2" />
+                <rect x="8" y="1.5" width="4.5" height="4.5" rx="1.2" />
+                <rect x="1.5" y="8" width="4.5" height="4.5" rx="1.2" />
+                <rect x="8" y="8" width="4.5" height="4.5" rx="1.2" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       {view === "list" ? (
         <ul className="list fade" onPointerLeave={() => setHovered(null)}>
           {projects.map((p, i) => (
             <li key={p.slug}>
-              <Link href={`/work/${p.slug}/`} className="row" onPointerEnter={() => setHovered(p)}>
+              <Link
+                href={`${base}/${p.slug}/`}
+                className="row"
+                onPointerEnter={() => setHovered(p)}
+              >
                 <h2>
                   <span className="num">{String(i + 1).padStart(2, "0")}</span>
                   {p.title}
@@ -110,7 +155,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
       ) : (
         <div className="grid fade">
           {projects.map((p) => (
-            <Link key={p.slug} href={`/work/${p.slug}/`} className="card">
+            <Link key={p.slug} href={`${base}/${p.slug}/`} className="card">
               <div className="frame">
                 <Cover p={p} />
               </div>
@@ -124,9 +169,18 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
       {/* Rendered on <body> so the page's own transforms never shift it. */}
       {mounted &&
         createPortal(
-          <div ref={peek} className={`peek${view === "list" && hovered ? " on" : ""}`} aria-hidden>
+          <div
+            ref={peek}
+            className={`peek${view === "list" && hovered ? " on" : ""}`}
+            aria-hidden
+          >
             {projects.map((p) => (
-              <div key={p.slug} style={{ display: hovered?.slug === p.slug ? "contents" : "none" }}>
+              <div
+                key={p.slug}
+                style={{
+                  display: hovered?.slug === p.slug ? "contents" : "none",
+                }}
+              >
                 <Cover p={p} />
               </div>
             ))}
@@ -137,7 +191,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
   );
 }
 
-function Cover({ p }: { p: Project }) {
+function Cover({ p }: { p: Item }) {
   if (p.cover) return <img src={p.cover} alt="" loading="lazy" />;
   return (
     <div className="code-tile">
