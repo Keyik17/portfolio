@@ -188,7 +188,7 @@ img { display: block; max-width: 100%; }
 .peek {
   position: fixed;
   top: 0; left: 0;
-  width: 360px;
+  width: clamp(150px, 32vw, 360px);
   aspect-ratio: 16 / 10;
   border-radius: 12px;
   overflow: hidden;
