@@ -238,58 +238,29 @@ img { display: block; max-width: 100%; }
 .code-tile span:last-child { color: #7fd18b; }
 
 /* ---------- walkthroughs ---------- */
-.reel .bar { margin-top: 56px; }
-.reel-stage {
-  position: relative;
-  aspect-ratio: 1600 / 1002;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--frame);
-}
-.reel-stage video, .reel-poster img { display: block; width: 100%; height: 100%; object-fit: cover; background: #000; }
-.reel-poster { all: unset; display: block; width: 100%; height: 100%; cursor: pointer; position: relative; }
-.reel-poster img { transition: transform 0.9s var(--ease), filter 0.4s; }
-.reel-poster:hover img { transform: scale(1.015); filter: brightness(0.92); }
-.reel-poster:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
-.reel-play {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 16px 9px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.9);
-  color: #0a0a0a;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.35s var(--ease);
-}
-.reel-play i { font-style: normal; color: #737373; font-variant-numeric: tabular-nums; }
-.reel-poster:hover .reel-play { transform: translateY(-2px); }
+.reel { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.reel-tile { all: unset; cursor: pointer; display: block; width: 100%; }
+.reel-thumb { display: block; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: var(--frame); }
+.reel-thumb video { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.reel-tile:hover .reel-thumb video { transform: scale(1.03); }
+.reel-tile:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 8px; }
+.reel-title { display: block; margin-top: 8px; color: var(--faint); font-size: 13px; transition: color 0.2s; }
+.reel-tile:hover .reel-title { color: var(--ink); }
 
-.reel-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.reel-list button {
-  all: unset;
-  cursor: pointer;
+.reel-box {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: baseline;
-  width: 100%;
-  padding-top: 12px;
-  position: relative;
-  color: var(--faint);
-  transition: color 0.2s;
+  place-items: center;
+  padding: 24px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: fade 0.35s var(--ease) both;
+  cursor: zoom-out;
 }
-.reel-list button:hover, .reel-list button[aria-pressed="true"] { color: var(--ink); }
-.reel-list button:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
-.reel-list .num { color: var(--faint); font-variant-numeric: tabular-nums; margin-right: 10px; }
-.reel-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.reel-len { color: var(--faint); font-variant-numeric: tabular-nums; margin-left: 8px; }
-.reel-line { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--line); overflow: hidden; }
-.reel-list button[aria-pressed="true"] .reel-line { background: color-mix(in srgb, var(--ink) 18%, transparent); }
-.reel-line span { position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform 0.25s linear; }
+.reel-box video { width: min(1100px, 100%); max-height: 86vh; border-radius: 10px; background: #000; cursor: auto; }
 
 /* ---------- frames & case study ---------- */
 .frame {
@@ -412,10 +383,8 @@ figcaption { color: var(--faint); margin-top: 12px; }
     align-items: end;
     padding: 14px 0;
   }
-  .reel .bar { margin-top: 40px; }
-  .reel-play { left: 12px; bottom: 12px; padding: 7px 13px 7px 11px; font-size: 14px; }
-  .reel-list { grid-template-columns: 1fr; gap: 0; }
-  .reel-list button { padding: 10px 0 8px; }
+  .reel { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; margin-top: 32px; }
+  .reel-box { padding: 12px; }
   .row-thumb { display: block; grid-row: 1 / 3; align-self: center; width: 88px; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; background: var(--frame); }
   .row-thumb .code-tile { font-size: 3px; padding: 6px; }
   .row-thumb img, .row-thumb .code-tile { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 0; }

@@ -1,82 +1,76 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
-type Clip = { slug: string; title: string; length: string };
+type Clip = { slug: string; title: string };
 
 const clips: Clip[] = [
-  { slug: "roundtrip", title: "Roundtrip", length: "1:48" },
-  { slug: "petal-glow", title: "Petal & Glow", length: "2:23" },
-  { slug: "section-library", title: "Section Library", length: "2:29" },
-  { slug: "nsac", title: "NSAC", length: "5:42" },
+  { slug: "roundtrip", title: "Roundtrip" },
+  { slug: "petal-glow", title: "Petal & Glow" },
+  { slug: "section-library", title: "Section Library" },
+  { slug: "nsac", title: "NSAC" },
 ];
 
 const src = (c: Clip, ext: string) => `/reel/${c.slug}.${ext}`;
 
 export function Reel() {
-  const [active, setActive] = useState(0);
-  const [started, setStarted] = useState(false);
-  const video = useRef<HTMLVideoElement>(null);
-  const bar = useRef<HTMLSpanElement>(null);
-  const clip = clips[active];
+  const [open, setOpen] = useState<Clip | null>(null);
 
-  // Thin progress line under the active title.
   useEffect(() => {
-    const v = video.current;
-    if (!v) return;
-    const tick = () => {
-      if (bar.current) bar.current.style.transform = `scaleX(${v.duration ? v.currentTime / v.duration : 0})`;
+    if (!open) return;
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
+    window.addEventListener("keydown", esc);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", esc);
+      document.body.style.overflow = "";
     };
-    v.addEventListener("timeupdate", tick);
-    return () => v.removeEventListener("timeupdate", tick);
-  }, [started, active]);
-
-  useEffect(() => {
-    if (started) video.current?.play().catch(() => {});
-  }, [active, started]);
+  }, [open]);
 
   return (
-    <section className="reel" aria-label="Walkthroughs">
-      <div className="bar">
-        <small>Walkthroughs</small>
-      </div>
-
-      <div className="reel-stage">
-        {started ? (
-          <video
-            key={clip.slug}
-            ref={video}
-            src={src(clip, "mp4")}
-            poster={src(clip, "webp")}
-            controls
-            playsInline
-            preload="auto"
-          />
-        ) : (
-          <button className="reel-poster" onClick={() => setStarted(true)} aria-label={`Play ${clip.title} walkthrough`}>
-            <img src={src(clip, "webp")} alt="" />
-            <span className="reel-play">
-              <svg width="10" height="12" viewBox="0 0 10 12" aria-hidden>
-                <path d="M0 0l10 6-10 6z" fill="currentColor" />
-              </svg>
-              Play <i>{clip.length}</i>
-            </span>
-          </button>
-        )}
-      </div>
-
-      <ol className="reel-list">
-        {clips.map((c, i) => (
+    <>
+      <ul className="reel">
+        {clips.map((c) => (
           <li key={c.slug}>
-            <button aria-pressed={i === active} onClick={() => setActive(i)}>
-              <span className="reel-line">{i === active && <span ref={bar} />}</span>
-              <span className="num">{String(i + 1).padStart(2, "0")}</span>
-              <span className="reel-title">{c.title}</span>
-              <span className="reel-len">{c.length}</span>
-            </button>
+            <Tile clip={c} onOpen={() => setOpen(c)} />
           </li>
         ))}
-      </ol>
-    </section>
+      </ul>
+
+      {open &&
+        createPortal(
+          <div className="reel-box" role="dialog" aria-label={`${open.title} walkthrough`} onClick={() => setOpen(null)}>
+            <video
+              src={src(open, "mp4")}
+              poster={src(open, "webp")}
+              controls
+              autoPlay
+              playsInline
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>,
+          document.body,
+        )}
+    </>
+  );
+}
+
+// A small still that quietly plays on hover; click opens it with sound.
+function Tile({ clip, onOpen }: { clip: Clip; onOpen: () => void }) {
+  const v = useRef<HTMLVideoElement>(null);
+  return (
+    <button
+      className="reel-tile"
+      onClick={onOpen}
+      onPointerEnter={(e) => e.pointerType === "mouse" && v.current?.play().catch(() => {})}
+      onPointerLeave={() => v.current?.pause()}
+      aria-label={`Watch ${clip.title} walkthrough`}
+    >
+      <span className="reel-thumb">
+        <video ref={v} src={src(clip, "mp4")} poster={src(clip, "webp")} muted loop playsInline preload="none" />
+      </span>
+      <span className="reel-title">{clip.title}</span>
+    </button>
   );
 }
