@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { Play } from "@/components/Icons";
 
 type Clip = { slug: string; title: string };
 
 export const clips: Clip[] = [
   { slug: "roundtrip", title: "Roundtrip" },
-  { slug: "petal-glow", title: "Petal & Glow" },
-  { slug: "section-library", title: "Section Library" },
   { slug: "nsac", title: "NSAC" },
+  { slug: "section-library", title: "Section Library" },
+  { slug: "petal-glow", title: "Petal & Glow" },
 ];
 
 // Small copies for the hover previews; full-quality ones (in R2, served by keyik.dev) for watching.
@@ -37,15 +38,15 @@ export function Reel() {
   );
 }
 
-// "Watch the tour" button on a case study.
+// "Video tutorial" button on a case study.
 export function WatchButton({ slug }: { slug: string }) {
   const clip = clips.find((c) => c.slug === slug);
   const [open, setOpen] = useState(false);
   if (!clip) return null;
   return (
     <>
-      <button className="visit watch" onClick={() => setOpen(true)}>
-        Watch the tour <i aria-hidden>▶</i>
+      <button className="watch" onClick={() => setOpen(true)}>
+        Video tutorial <Play />
       </button>
       {open && <Player clip={clip} onClose={() => setOpen(false)} />}
     </>
@@ -53,6 +54,10 @@ export function WatchButton({ slug }: { slug: string }) {
 }
 
 function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
+  const v = useRef<HTMLVideoElement>(null);
+  const fill = useRef<HTMLSpanElement>(null);
+  const [playing, setPlaying] = useState(false);
+
   useEffect(() => {
     const esc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", esc);
@@ -63,16 +68,92 @@ function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
     };
   }, [onClose]);
 
+  const toggle = () => {
+    const el = v.current;
+    if (!el) return;
+    if (el.paused) el.play().catch(() => {});
+    else el.pause();
+  };
+
+  const seek = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = v.current;
+    if (!el?.duration) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    el.currentTime = ((e.clientX - r.left) / r.width) * el.duration;
+  };
+
   return createPortal(
-    <div className="reel-box" role="dialog" aria-label={`${clip.title} video tour`} onClick={onClose}>
-      <video
-        src={watch(clip)}
-        poster={src(clip, "webp")}
-        controls
-        autoPlay
-        playsInline
-        onClick={(e) => e.stopPropagation()}
-      />
+    <div
+      className="reel-box"
+      role="dialog"
+      aria-label={`${clip.title} video tutorial`}
+      onClick={onClose}
+    >
+      <div className="reel-stage" onClick={(e) => e.stopPropagation()}>
+        <button className="reel-back" onClick={onClose}>
+          ← back
+        </button>
+        <div className={`reel-player${playing ? " is-playing" : ""}`}>
+          <video
+            ref={v}
+            src={watch(clip)}
+            poster={src(clip, "webp")}
+            autoPlay
+            playsInline
+            onClick={toggle}
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
+            onTimeUpdate={(e) => {
+              const el = e.currentTarget;
+              if (fill.current)
+                fill.current.style.transform = `scaleX(${el.duration ? el.currentTime / el.duration : 0})`;
+            }}
+          />
+          <button
+            className="reel-toggle"
+            onClick={toggle}
+            aria-label={playing ? "Pause" : "Play"}
+          >
+            {playing ? (
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
+                <rect
+                  x="4"
+                  y="3"
+                  width="2.6"
+                  height="10"
+                  rx="1"
+                  fill="currentColor"
+                />
+                <rect
+                  x="9.4"
+                  y="3"
+                  width="2.6"
+                  height="10"
+                  rx="1"
+                  fill="currentColor"
+                />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
+                <path
+                  d="M5 3.2v9.6c0 .5.5.8.9.5l7.2-4.8a.6.6 0 000-1L5.9 2.7c-.4-.3-.9 0-.9.5z"
+                  fill="currentColor"
+                />
+              </svg>
+            )}
+          </button>
+          <div
+            className="reel-progress"
+            onPointerDown={seek}
+            role="slider"
+            aria-label="Seek"
+            aria-valuemin={0}
+            aria-valuemax={100}
+          >
+            <span ref={fill} />
+          </div>
+        </div>
+      </div>
     </div>,
     document.body,
   );
@@ -85,12 +166,22 @@ function Tile({ clip, onOpen }: { clip: Clip; onOpen: () => void }) {
     <button
       className="reel-tile"
       onClick={onOpen}
-      onPointerEnter={(e) => e.pointerType === "mouse" && v.current?.play().catch(() => {})}
+      onPointerEnter={(e) =>
+        e.pointerType === "mouse" && v.current?.play().catch(() => {})
+      }
       onPointerLeave={() => v.current?.pause()}
-      aria-label={`Watch ${clip.title} video tour`}
+      aria-label={`Watch ${clip.title} video tutorial`}
     >
       <span className="reel-thumb">
-        <video ref={v} src={src(clip, "mp4")} poster={src(clip, "webp")} muted loop playsInline preload="none" />
+        <video
+          ref={v}
+          src={src(clip, "mp4")}
+          poster={src(clip, "webp")}
+          muted
+          loop
+          playsInline
+          preload="none"
+        />
       </span>
       <span className="reel-title">{clip.title}</span>
     </button>
