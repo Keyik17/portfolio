@@ -36,7 +36,7 @@ export default async function Work({ params }: { params: Promise<{ slug: string 
       <div className="actions">
         {p.live && (
           <a className="visit" href={p.live.href} target="_blank" rel="noreferrer">
-            Visit site
+            Visit site <i aria-hidden>↗</i>
           </a>
         )}
         <WatchButton slug={p.slug} />
