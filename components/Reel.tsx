@@ -21,9 +21,9 @@ const watch = (c: Clip) => `${host}/media/reel/${c.slug}.mp4?v=2`;
 export function Reel() {
   const [open, setOpen] = useState<Clip | null>(null);
   return (
-    <section aria-label="Video tours">
+    <section aria-label="Video explanations">
       <div className="bar">
-        <small>Video tours</small>
+        <small>Video explanations</small>
       </div>
       <ul className="reel">
         {clips.map((c) => (
@@ -37,7 +37,7 @@ export function Reel() {
   );
 }
 
-// "Video tutorial" button on a case study.
+// "Video explanation" button on a case study.
 export function WatchButton({ slug }: { slug: string }) {
   const clip = clips.find((c) => c.slug === slug);
   const [open, setOpen] = useState(false);
@@ -45,7 +45,7 @@ export function WatchButton({ slug }: { slug: string }) {
   return (
     <>
       <button className="watch" onClick={() => setOpen(true)}>
-        Video tutorial
+        Video explanation
       </button>
       {open && <Player clip={clip} onClose={() => setOpen(false)} />}
     </>
@@ -95,7 +95,7 @@ function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
     <div
       className="reel-box"
       role="dialog"
-      aria-label={`${clip.title} video tutorial`}
+      aria-label={`${clip.title} video explanation`}
       onClick={onClose}
     >
       <div className="reel-stage" onClick={(e) => e.stopPropagation()}>
@@ -193,7 +193,7 @@ function Tile({ clip, onOpen }: { clip: Clip; onOpen: () => void }) {
         e.pointerType === "mouse" && v.current?.play().catch(() => {})
       }
       onPointerLeave={() => v.current?.pause()}
-      aria-label={`Watch ${clip.title} video tutorial`}
+      aria-label={`Watch ${clip.title} video explanation`}
     >
       <span className="reel-thumb">
         <video
