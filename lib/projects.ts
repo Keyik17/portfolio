@@ -117,6 +117,7 @@ export const projects: Project[] = [
     meta: [
       { label: "Role", value: "Design" },
       { label: "Scope", value: "Heroes, about, services, social, calls to action, mobile" },
+      { label: "File", value: "regular.pen (zip, 19 MB)", href: "/work/section-library/regular-pen.zip" },
     ],
     body: [
       "A set of section designs (heroes, about, services, social and calls to action) meant to be combined in different orders and still feel like one site, on desktop and on phones.",

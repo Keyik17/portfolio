@@ -1,3 +1,4 @@
+import { Reel } from "@/components/Reel";
 import { WorkIndex } from "@/components/WorkIndex";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
@@ -9,6 +10,7 @@ export default function Home() {
         {site.name}, {site.role.toLowerCase()}.
       </p>
       <p className="lede">{site.intro}</p>
+      <Reel />
       <WorkIndex projects={projects} />
     </div>
   );
