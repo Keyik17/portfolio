@@ -306,10 +306,7 @@ img { display: block; max-width: 100%; }
   padding: 9px 16px; border-radius: 999px; background: var(--ink); color: var(--bg);
   transition: opacity .2s;
 }
-.visit svg, .watch svg { transition: transform .25s var(--ease); }
 .visit:hover { opacity: .85; }
-.visit:hover svg { transform: translate(2px, -2px); }
-.watch:hover svg { transform: translateX(2px); }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .actions .visit { margin-top: 0; }
 .watch { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); transition: background .2s; }

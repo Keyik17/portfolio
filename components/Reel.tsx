@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Play } from "@/components/Icons";
 
 type Clip = { slug: string; title: string };
 
@@ -46,7 +45,7 @@ export function WatchButton({ slug }: { slug: string }) {
   return (
     <>
       <button className="watch" onClick={() => setOpen(true)}>
-        Video tutorial <Play />
+        Video tutorial
       </button>
       {open && <Player clip={clip} onClose={() => setOpen(false)} />}
     </>

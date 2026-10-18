@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WatchButton } from "@/components/Reel";
-import { ArrowUpRight } from "@/components/Icons";
 import { notFound, redirect } from "next/navigation";
 import { Figure } from "@/components/Figure";
 import { getProject, movedProjects, projects } from "@/lib/projects";
@@ -37,7 +36,7 @@ export default async function Work({ params }: { params: Promise<{ slug: string 
       <div className="actions">
         {p.live && (
           <a className="visit" href={p.live.href} target="_blank" rel="noreferrer">
-            Visit site <ArrowUpRight />
+            Visit site
           </a>
         )}
         <WatchButton slug={p.slug} />
