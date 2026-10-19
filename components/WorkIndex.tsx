@@ -26,6 +26,21 @@ export function WorkIndex({
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
+  // Fetch the hover previews quietly once the page has loaded, so they appear
+  // instantly. Skipped on touch screens, which never show them.
+  const [warm, setWarm] = useState(false);
+  useEffect(() => {
+    if (!matchMedia("(hover: hover)").matches) return;
+    let t = 0;
+    const go = () => (t = window.setTimeout(() => setWarm(true), 600));
+    if (document.readyState === "complete") go();
+    else addEventListener("load", go, { once: true });
+    return () => {
+      removeEventListener("load", go);
+      clearTimeout(t);
+    };
+  }, []);
+
   useEffect(() => {
     try {
       const saved = localStorage.getItem("view");
@@ -181,7 +196,7 @@ export function WorkIndex({
                   display: hovered?.slug === p.slug ? "contents" : "none",
                 }}
               >
-                <Cover p={p} />
+                <Cover p={p} eager={warm} />
               </div>
             ))}
           </div>,
@@ -191,8 +206,11 @@ export function WorkIndex({
   );
 }
 
-function Cover({ p }: { p: Item }) {
-  if (p.cover) return <img src={p.cover} alt="" loading="lazy" />;
+// Lists and cards show a small copy of each cover; see the -thumb files next to them.
+const thumb = (src: string) => src.replace(/\.webp$/, "-thumb.webp");
+
+function Cover({ p, eager = false }: { p: Item; eager?: boolean }) {
+  if (p.cover) return <img src={thumb(p.cover)} alt="" loading={eager ? "eager" : "lazy"} decoding="async" />;
   return (
     <div className="code-tile">
       <span>~/multitenant-cms</span>

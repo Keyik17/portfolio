@@ -218,7 +218,7 @@ function Tile({ clip, onOpen }: { clip: Clip; onOpen: () => void }) {
         <video
           ref={v}
           src={src(clip, "mp4")}
-          poster={src(clip, "webp")}
+          poster={`/reel/${clip.slug}-thumb.webp`}
           muted
           loop
           playsInline
