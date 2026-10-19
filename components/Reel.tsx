@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { track } from "@/lib/track";
 
 type Clip = { slug: string; title: string };
 
@@ -28,7 +29,13 @@ export function Reel() {
       <ul className="reel">
         {clips.map((c) => (
           <li key={c.slug}>
-            <Tile clip={c} onOpen={() => setOpen(c)} />
+            <Tile
+              clip={c}
+              onOpen={() => {
+                setOpen(c);
+                track("video_opened", { video: c.slug, from: "home" });
+              }}
+            />
           </li>
         ))}
       </ul>
@@ -44,7 +51,13 @@ export function WatchButton({ slug }: { slug: string }) {
   if (!clip) return null;
   return (
     <>
-      <button className="watch" onClick={() => setOpen(true)}>
+      <button
+        className="watch"
+        onClick={() => {
+          setOpen(true);
+          track("video_opened", { video: clip.slug, from: "case study" });
+        }}
+      >
         Video explanation
       </button>
       {open && <Player clip={clip} onClose={() => setOpen(false)} />}
@@ -76,8 +89,10 @@ function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
 
   const box = useRef<HTMLDivElement>(null);
   const expand = () => {
-    const el = box.current as (HTMLDivElement & { webkitRequestFullscreen?: () => void }) | null;
-    const vid = v.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    const el = box.current as
+      (HTMLDivElement & { webkitRequestFullscreen?: () => void }) | null;
+    const vid = v.current as
+      (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
     if (document.fullscreenElement) return void document.exitFullscreen();
     if (el?.requestFullscreen) el.requestFullscreen().catch(() => {});
     else if (el?.webkitRequestFullscreen) el.webkitRequestFullscreen();
@@ -151,7 +166,11 @@ function Player({ clip, onClose }: { clip: Clip; onClose: () => void }) {
               </svg>
             )}
           </button>
-          <button className="reel-expand" onClick={expand} aria-label="Full screen">
+          <button
+            className="reel-expand"
+            onClick={expand}
+            aria-label="Full screen"
+          >
             <svg
               width="14"
               height="14"
